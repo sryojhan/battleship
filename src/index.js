@@ -1,7 +1,7 @@
-import "./styles.css"
+import './styles.css';
 
 function hola() {
-    console.log('BIENVENIDO');
+  console.log('BIENVENIDO');
 }
 
 hola();
