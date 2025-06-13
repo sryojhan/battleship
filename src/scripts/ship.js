@@ -3,9 +3,23 @@
 
     - Manage it's size
     - Manage it's health
-
 */
 
-class Ship {}
+const CreateShip = function (length) {
 
-export default Ship;
+    let hits = 0;
+
+    const Hit = function () {
+        
+        hits++;
+    }
+
+    const IsSunk = function(){
+
+        return hits >= length;
+    }
+
+    return {Hit, IsSunk};
+}
+
+export default CreateShip;
