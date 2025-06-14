@@ -29,6 +29,6 @@
     "format": "prettier ./src --write",
     "format:check": "prettier ./src --check",
     "test": "jest",
-    "watch": "jest --watch"
+    "watch": "jest --watch --noStackTrace"
   }
 }
