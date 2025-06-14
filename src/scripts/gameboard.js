@@ -118,6 +118,8 @@ const CreateGameboard = function (size) {
         return ships.every(ship => ship.IsSunk());
     }
 
+
+
     return { PlaceShip, AttackPosition, IsEverythingSunk };
 }
 

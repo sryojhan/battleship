@@ -31,3 +31,105 @@ body {
 
   font-family: 'Poppins', monospace;
 }
+
+.page{
+
+  height: 100%;
+  display: flex;
+}
+
+.left-info{
+
+  flex: 0 0 300px;
+}
+
+.right-info{
+  flex: 0 0 300px;
+
+  box-sizing: border-box;
+  padding-right: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: stretch;
+}
+
+.boards-container{
+
+  margin: auto;
+
+  width: 445px;
+  height: 900px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+
+.board{
+
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+
+  gap: 1px;
+}
+
+.self .cell{
+
+  background-color: rgb(91, 141, 91);
+}
+
+.enemy .cell:not(.hit):not(.reveal):not(.water):hover{
+
+  cursor: pointer;
+}
+
+/** self */
+
+.self .cell.water{
+
+  background-color: green;
+}
+
+.self .cell.hit{
+
+  background-color: red;
+}
+
+.self .cell.reveal{
+
+  background-color: rgb(7, 59, 7);
+}
+
+/** Enemy */
+
+.enemy .cell{
+  background-color: rgb(121, 121, 226);
+}
+
+.enemy .cell:hover{
+  background-color: blue;
+}
+
+.enemy .cell.water{
+
+  background-color: rgb(49, 45, 70);
+}
+
+.enemy .cell.hit{
+
+  background-color: rgb(17, 57, 233);
+}
+
+.enemy .cell.reveal{
+
+  background-color: rgb(16, 16, 110);
+}

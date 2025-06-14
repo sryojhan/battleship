@@ -4,6 +4,7 @@ import CreateGameboard from "./gameboard.js"
 const CreatePlayer = function (size) {
 
     const board = CreateGameboard(size);
+    const ships = [];
 
     const ReceiveAttack = function (position) {
         return board.AttackPosition(position);
@@ -14,9 +15,28 @@ const CreatePlayer = function (size) {
         return board.IsEverythingSunk();
     }
 
+    const PlaceShip = function(topLeftCoordinate, length, isHorizontal){
+
+        const ret = board.PlaceShip(topLeftCoordinate, length, isHorizontal);
+
+        if(ret){
+
+            ships.push({position: topLeftCoordinate, length, isHorizontal});
+        }
+
+        return ret;
+    }
+
+    const ChooseAttack = function(){
+
+    }
+
+    const GetAllShips = function(){
+        return ships;
+    }
 
     //* Add ChooseAttack here so intellisense detects it
-    return { ChooseAttack, ReceiveAttack, IsDefeated };
+    return { ChooseAttack, ReceiveAttack, IsDefeated, PlaceShip, GetAllShips, isHuman: true };
 }
 
 const CreateHumanPlayer = function (size, HumanSelection) {
@@ -34,7 +54,7 @@ const CreateComputerPlayer = function (size) {
 
     const playerLogic = CreatePlayer(size);
 
-    const options = Array.from({length: N * N}, (_, idx) => idx);
+    const options = Array.from({length: size * size}, (_, idx) => idx);
 
     const RandomComputerAttack = function(){
 
@@ -53,6 +73,7 @@ const CreateComputerPlayer = function (size) {
 
 
     playerLogic.ChooseAttack = RandomComputerAttack;
+    playerLogic.isHuman = false;
 
     return playerLogic;
 }
