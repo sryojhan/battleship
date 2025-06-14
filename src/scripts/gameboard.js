@@ -17,7 +17,7 @@
     ships: 1 x Carrier (5), 2 x Battleship (4), 3 x Destroyer (3), 4 x Submarine (3), 5 x Patrol Boat (2) 
 */
 
-import CreateShip from "./ship";
+import CreateShip from "./ship.js";
 
 const CreateGameboard = function (size) {
 

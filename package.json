@@ -30,5 +30,6 @@
     "format:check": "prettier ./src --check",
     "test": "jest",
     "watch": "jest --watch --noStackTrace"
-  }
+  },
+  "type": "module"
 }
