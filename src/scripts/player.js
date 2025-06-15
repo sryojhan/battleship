@@ -35,8 +35,16 @@ const CreatePlayer = function (size) {
         return ships;
     }
 
-    //* Add ChooseAttack here so intellisense detects it
-    return { ChooseAttack, ReceiveAttack, IsDefeated, PlaceShip, GetAllShips, isHuman: true };
+    const GetAllShipPointsAtPosition = function(position){
+        return board.GetShipPointsAtPosition(position);
+    }
+
+    const IsShipAtPositionSunk = function(position){
+        return board.IsShipAtPositionSunk(position);
+    }
+
+
+    return { ChooseAttack, ReceiveAttack, IsDefeated, PlaceShip, GetAllShips, GetAllShipPointsAtPosition, IsShipAtPositionSunk };
 }
 
 const CreateHumanPlayer = function (size, HumanSelection) {

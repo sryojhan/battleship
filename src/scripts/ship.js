@@ -5,9 +5,11 @@
     - Manage it's health
 */
 
-const CreateShip = function (length) {
+const CreateShip = function (length, ShipPoints) {
 
     let hits = 0;
+
+    const points = ShipPoints;
 
     const Hit = function () {
         
@@ -19,7 +21,11 @@ const CreateShip = function (length) {
         return hits >= length;
     }
 
-    return {Hit, IsSunk};
+    const GetShipPoints = function(){
+        return points;
+    }
+
+    return {Hit, IsSunk, GetShipPoints};
 }
 
 export default CreateShip;

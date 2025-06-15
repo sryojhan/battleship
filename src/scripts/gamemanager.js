@@ -2,7 +2,7 @@ import { CreateHumanPlayer, CreateComputerPlayer } from "./player";
 
 
 
-const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginComputerTurn, VisualizeComputerSelection) {
+const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginComputerTurn, VisualizeComputerSelection, onSunkShip, CPUvsCPU) {
 
     let playing = false;
 
@@ -62,7 +62,7 @@ const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginCom
 
     const HumanSelection = function (i) {
 
-        if(!playing) return;
+        if (!playing) return;
 
         const col = i % size;
         const row = Math.floor(i / size);
@@ -70,6 +70,12 @@ const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginCom
         const ret = computer.ReceiveAttack([col, row]);
 
         if (ret === 1) {
+
+            if (computer.IsShipAtPositionSunk([col, row])) {
+
+                onSunkShip(false, computer.GetAllShipPointsAtPosition([col, row]));
+            }
+
             CheckVictory();
         }
 
@@ -84,7 +90,7 @@ const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginCom
 
     const ComputerSelection = function () {
 
-        if(!playing) return;
+        if (!playing) return;
 
         const position = computer.ChooseAttack();
 
@@ -101,6 +107,12 @@ const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginCom
         if (ret === 0) {
             onBeginHumanTurn();
             return ret;
+        }
+
+        console.log(position);
+        if (human.IsShipAtPositionSunk(position)) {
+
+            onSunkShip(true, human.GetAllShipPointsAtPosition(position));
         }
 
         CheckVictory();

@@ -66,14 +66,18 @@ const CreateGameboard = function (size) {
 
         //* First check if all the positions are valid
 
+        const points = [];
+
         for (let i = 0; i < length; i++) {
 
             const position = CalculatePosition(i);
 
+            points.push(position);
+
             if (!IsPositionAvaliable(position)) return false;
         }
 
-        const ship = CreateShip(length);
+        const ship = CreateShip(length, points);
 
         for (let i = 0; i < length; i++) {
 
@@ -118,9 +122,19 @@ const CreateGameboard = function (size) {
         return ships.every(ship => ship.IsSunk());
     }
 
+    const IsShipAtPositionSunk = function(position){
+        if (!IsPointInsideBounds(position)) return false;
 
+        return grid[position[0]][position[1]].IsSunk();
+    }
 
-    return { PlaceShip, AttackPosition, IsEverythingSunk };
+    const GetShipPointsAtPosition = function(position){
+        if (!IsPointInsideBounds(position)) return null;
+
+        return grid[position[0]][position[1]].GetShipPoints();
+    }
+
+    return { PlaceShip, AttackPosition, IsEverythingSunk, IsShipAtPositionSunk, GetShipPointsAtPosition};
 }
 
 export default CreateGameboard;

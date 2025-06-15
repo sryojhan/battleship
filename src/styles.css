@@ -107,28 +107,33 @@ body {
 
 .self .cell{
 
-  background-color: #e0f2ff;
+  background-color: #e0f7fa;
 }
 
 .self .cell.water{
 
-  background-color: #bcdff1;
+  background-color: #b2ebf2;
 }
 
 .self .cell.hit.reveal{
 
-  background-color: #1d3557;
+  background-color: #00796b;
 }
 
 .self .cell.reveal{
 
-  background-color: #457b9d;
+  background-color: #4db6ac;
 }
 
-.self .cell:hover{
+.self .cell.sunk{
+
+  background-color: #004d40 !important;
+}
+
+/* .self .cell:hover{
   
   background-color: #a8dadc;
-}
+} */
 
 /** Enemy */
 
@@ -152,5 +157,10 @@ body {
 
 .enemy .cell.reveal{
 
-  background-color: #b71c1c;
+  background-color: #bcaaa4;
+}
+
+.enemy .cell.sunk{
+
+  background-color: #8e0000  !important;
 }

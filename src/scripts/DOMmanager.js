@@ -144,9 +144,6 @@ const BeginHumanTurn = function () {
         return;
     }
 
-    console.log("hola");
-
-
     isComputerTurnOver = false;
 
     enemy.classList.remove('dark');
@@ -159,13 +156,10 @@ const VisualizeComputerSelection = function (idx, result) {
     ProcessQueueSelection();
 }
 
-
-
 const ProcessQueueSelection = async function () {
 
     if (isComputerWaiting) return;
 
-    console.log("waiting");
     isComputerWaiting = true;
 
     const { idx, result } = computerMovesQueue.shift();
@@ -199,7 +193,6 @@ const ProcessQueueSelection = async function () {
 
 
     isComputerWaiting = false;
-    console.log("stop wait");
 
 
 
@@ -209,5 +202,20 @@ const ProcessQueueSelection = async function () {
 }
 
 
+const SunkShip = function (isPlayer, positions) {
 
-export { InitialiseBoards, CreateBoardBackground, HighlightPlayerShips, InitialiseButtons, HumanWin, ComputerWin, BeginHumanTurn, BeginComputerTurn, VisualizeComputerSelection };
+
+    const parent = isPlayer ? board :enemy;
+
+
+    for (const position of positions) {
+
+        const idx = position[1] * size + position[0];
+
+        parent.children[idx].classList.add('sunk');
+    }
+
+}
+
+
+export { InitialiseBoards, CreateBoardBackground, HighlightPlayerShips, InitialiseButtons, HumanWin, ComputerWin, BeginHumanTurn, BeginComputerTurn, VisualizeComputerSelection, SunkShip };
