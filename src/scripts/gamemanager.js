@@ -2,7 +2,7 @@ import { CreateHumanPlayer, CreateComputerPlayer } from "./player";
 
 
 
-const GameManager = function (size) {
+const GameManager = function (size, onWin, onLoose, onBeginHumanTurn, onBeginComputerTurn, VisualizeComputerSelection) {
 
     let playing = false;
 
@@ -30,8 +30,9 @@ const GameManager = function (size) {
     }
 
     const Begin = function () {
-        playing = true;
 
+        playing = true;
+        onBeginHumanTurn();
     }
 
     const GetAllHumanShips = function () {
@@ -44,20 +45,72 @@ const GameManager = function (size) {
         return computer.GetAllShips();
     }
 
-    const BeginHumanSelection = function () {
+    const CheckVictory = function () {
 
+        if (human.IsDefeated()) {
+
+            onLoose();
+            playing = false;
+        }
+        if (computer.IsDefeated()) {
+
+            onWin();
+            playing = false;
+        }
+        return 0;
     }
 
     const HumanSelection = function (i) {
 
+        if(!playing) return;
+
         const col = i % size;
         const row = Math.floor(i / size);
 
-        return computer.ReceiveAttack([col, row]);
+        const ret = computer.ReceiveAttack([col, row]);
+
+        if (ret === 1) {
+            CheckVictory();
+        }
+
+        else if (ret === 0) {
+
+            onBeginComputerTurn();
+            ComputerSelection();
+        }
+
+        return ret;
+    }
+
+    const ComputerSelection = function () {
+
+        if(!playing) return;
+
+        const position = computer.ChooseAttack();
+
+        const idx = position[1] * size + position[0];
+
+        const ret = human.ReceiveAttack(position);
+
+        if (ret === -1) {
+            return ComputerSelection();
+        }
+
+        VisualizeComputerSelection(idx, ret);
+
+        if (ret === 0) {
+            onBeginHumanTurn();
+            return ret;
+        }
+
+        CheckVictory();
+        ComputerSelection();
     }
 
 
-    const RandomHumanBoard = function(){
+
+
+    const RandomHumanBoard = function () {
 
         human = CreateHumanPlayer(size, HumanSelection);
         RandomizeBoardPosition(human);
@@ -72,7 +125,7 @@ const GameManager = function (size) {
     RandomizeBoardPosition(computer);
 
 
-    return { HumanSelection, Begin, GetAllHumanShips, GetAllComputerShips , RandomHumanBoard};
+    return { HumanSelection, Begin, GetAllHumanShips, GetAllComputerShips, RandomHumanBoard };
 }
 
 

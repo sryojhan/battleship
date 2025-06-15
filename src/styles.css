@@ -80,12 +80,23 @@ body {
   grid-template-rows: repeat(10, 1fr);
 
   gap: 1px;
+
+  position: relative;
 }
 
-.self .cell{
 
-  background-color: rgb(91, 141, 91);
+.board.dark::after{
+
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000060;
 }
+
+
 
 .enemy .cell:not(.hit):not(.reveal):not(.water):hover{
 
@@ -94,42 +105,52 @@ body {
 
 /** self */
 
-.self .cell.water{
+.self .cell{
 
-  background-color: green;
+  background-color: #e0f2ff;
 }
 
-.self .cell.hit{
+.self .cell.water{
 
-  background-color: red;
+  background-color: #bcdff1;
+}
+
+.self .cell.hit.reveal{
+
+  background-color: #1d3557;
 }
 
 .self .cell.reveal{
 
-  background-color: rgb(7, 59, 7);
+  background-color: #457b9d;
+}
+
+.self .cell:hover{
+  
+  background-color: #a8dadc;
 }
 
 /** Enemy */
 
 .enemy .cell{
-  background-color: rgb(121, 121, 226);
+  background-color: #fbe9e7;
 }
 
 .enemy .cell:hover{
-  background-color: blue;
+  background-color: #ffab40;
 }
 
 .enemy .cell.water{
 
-  background-color: rgb(49, 45, 70);
+  background-color: #ffccbc;
 }
 
 .enemy .cell.hit{
 
-  background-color: rgb(17, 57, 233);
+  background-color: #e53935;
 }
 
 .enemy .cell.reveal{
 
-  background-color: rgb(16, 16, 110);
+  background-color: #b71c1c;
 }

@@ -1,23 +1,17 @@
 import './styles.css';
 
-import { CreateBoardBackground, HighlightPlayerShips, InitialiseButtons } from './scripts/DOMmanager';
+import { HighlightPlayerShips, InitialiseButtons, ComputerWin, HumanWin, BeginHumanTurn, BeginComputerTurn, InitialiseBoards , VisualizeComputerSelection} from './scripts/DOMmanager';
 import GameManager from './scripts/gamemanager';
-
-const board = document.querySelector('.self');
-const enemy = document.querySelector('.enemy');
 
 const size = 10;
 
-const gameManager = GameManager(size);
+const gameManager = GameManager(size, HumanWin, ComputerWin, BeginHumanTurn, BeginComputerTurn, VisualizeComputerSelection);
 
-CreateBoardBackground(board, size, ()=>{console.log("self selected")});
-CreateBoardBackground(enemy, size, gameManager.HumanSelection);
+InitialiseBoards(size, ()=>{} ,gameManager.HumanSelection);
 
+HighlightPlayerShips(true, gameManager.GetAllHumanShips());
 
-
-HighlightPlayerShips(board, size, gameManager.GetAllHumanShips());
-
-InitialiseButtons(gameManager, board, size);
+InitialiseButtons(gameManager.RandomHumanBoard, gameManager.GetAllHumanShips, gameManager.Begin);
 
 
 console.log(gameManager.GetAllComputerShips());

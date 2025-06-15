@@ -58,7 +58,7 @@ const CreateComputerPlayer = function (size) {
 
     const RandomComputerAttack = function(){
 
-        if(optIdx.length === 0) return [0, 0];
+        if(options.length === 0) return [0, 0];
 
         const optIdx = Math.floor(Math.random() * options.length);
         const positionIdx = options[optIdx];
